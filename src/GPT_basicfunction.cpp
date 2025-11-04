@@ -18,7 +18,7 @@ bool GPTFunction::begin(uint8_t channel, uint32_t period, timer_source_div_t sd)
   return rv;
 }
 
-bool GPTFunction::setCallback(TimerIntSource_t intsrc, uint8_t priority, void (*callback)()) {
+bool GPTFunction::setCallback(timer_int_source_t intsrc, uint8_t priority, void (*callback)()) {
   bool rv = true;
   if (intsrc == OVERFLOW) {
     rv = fsp_timer.setup_overflow_irq(priority, callback);

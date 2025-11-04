@@ -32,7 +32,7 @@ typedef enum {
   COMPARE_A,      //Equivalent to CAPTURE_A   //CAPTURE_Aと同等
   CAPTURE_B,
   COMPARE_B       //Equivalent to CAPTURE_B   //CAPTURE_Bと同等
-} TimerIntSource_t;
+} timer_int_source_t;
 
 
 class GPTFunction {
@@ -46,7 +46,7 @@ public:
 
 //Set callback function of timer GPT interrupt together with priority level and vector table
 //タイマー割り込みのコールバック関数とその優先レベル、ベクタテーブルを設定する
-  bool setCallback(TimerIntSource_t intsrc, uint8_t priority, void (*callback)());
+  bool setCallback(timer_int_source_t intsrc, uint8_t priority, void (*callback)());
 
 //Refer current cause of interrupt and clear it
 //現在の割り込みフラグを参照してクリアする
