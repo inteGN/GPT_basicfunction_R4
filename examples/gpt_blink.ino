@@ -3,7 +3,7 @@
 //  DATE        :2025/11/03
 //  DESCRIPTION :GPT periodic irq example
 //  BOARD TYPE  :UNO R4 MINIMA
-//  AUTHOR      :inteGN
+//  AUTHER      :inteGN
 //************************************************
 /*
 Turns an LED on for one second, then off for one second, repeatedly.
@@ -22,6 +22,12 @@ routine (ISR) is called every 1 second and turns LED on/off.
 #include <Arduino.h>
 #include <GPT_basicfunction.h>
 
+//// Definitions
+#define     __NOP2            asm volatile ( \
+                                "nop   \n" \
+                                "nop   \n" \
+                                )
+
 //// Grobals
 GPTFunction  myGpt;
 uint8_t   ledState = 0;
@@ -37,6 +43,7 @@ void  irq_gptovf_callback() {
   flag1sec++;
 //Termination of Irq
   R_GPT0->GTST_b.TCFPO = 0;
+  __NOP2;
   myGpt.retCallback();
 }
 
