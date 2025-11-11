@@ -50,7 +50,7 @@ public:
 
 //Refer current cause of interrupt and clear it
 //現在の割り込みフラグを参照してクリアする
-  void retCallback(void);
+  void clearInterruptFlag(void);
 };
 
 

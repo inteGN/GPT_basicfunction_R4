@@ -14,7 +14,7 @@ GPT_basicfunction        KEYWORD1
 
 begin                    KEYWORD2
 setCallback              KEYWORD2
-retCallback              KEYWORD2
+clearInterruptFlag       KEYWORD2
 
 #######################################
 # Constants (KEYWORD3)

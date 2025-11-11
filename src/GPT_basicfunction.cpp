@@ -38,7 +38,7 @@ bool GPTFunction::setCallback(timer_int_source_t intsrc, uint8_t priority, void 
   return rv;
 }
 
-void GPTFunction::retCallback(void) {
+void GPTFunction::clearInterruptFlag(void) {
   R_BSP_IrqStatusClear(R_FSP_CurrentIrqGet ());
 }
 
