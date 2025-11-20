@@ -91,7 +91,7 @@ void setup() {
   }
 //Setup GPT0 and callback function
   noInterrupts();
-  myGpt.begin(0, 48000, TIMER_SOURCE_DIV_1);            //Set GPT0 period to 1sec (1e-3*48e6/1)
+  myGpt.begin(0, 48000, TIMER_SOURCE_DIV_1);            //Set GPT0 period to 1 msec (1e-3*48e6/1)
   myGpt.setCallback(OVERFLOW, 2, irq_gptovf_callback);  //Set callback function with priorty 2 (higher)
   R_GPT0->GTST_b.TCFPO = 0;                             //Overflow irq status clear
   R_GPT0->GTSTR_b.CSTRT0 = 1;                           //Start GPT0
