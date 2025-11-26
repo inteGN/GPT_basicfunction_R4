@@ -1,0 +1,29 @@
+#######################################
+# Syntax Coloring Map For GPT_basicfunction.h
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+GPT_basicfunction        KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin                    KEYWORD2
+setCallback              KEYWORD2
+clearInterruptFlag       KEYWORD2
+
+#######################################
+# Constants (KEYWORD3)
+#######################################
+
+OVERFLOW                 KEYWORD3
+UNDERFLOW                KEYWORD3
+CAPTURE_A                KEYWORD3
+COMPARE_A                KEYWORD3
+CAPTURE_B                KEYWORD3
+COMPARE_B                KEYWORD3
+
