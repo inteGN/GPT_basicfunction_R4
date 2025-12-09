@@ -70,6 +70,12 @@ routine (ISR) is called every 1 second and turns LED on/off.
 #include <Arduino.h>
 #include <GPT_basicfunction.h>
 
+//// Definitions
+#define     __NOP2            asm volatile ( \
+                                "nop   \n" \
+                                "nop   \n" \
+                                )
+
 //// Grobals
 GPTFunction  myGpt;
 uint8_t   ledState = 0;
@@ -77,7 +83,7 @@ uint8_t   flag1sec = 0;
 uint32_t  secCount = 0;
 
 
-//// ISR task every 1sec
+//// ISR task every 1 sec
 void  irq_gptovf_callback() {
 //LED blink
   ledState = !ledState;
@@ -85,7 +91,8 @@ void  irq_gptovf_callback() {
   flag1sec++;
 //Termination of Irq
   R_GPT0->GTST_b.TCFPO = 0;
-  myGpt.retCallback();
+  __NOP2;
+  myGpt.clearInterruptFlag();
 }
 
 
@@ -98,7 +105,7 @@ void setup() {
   digitalWrite(LED_BUILTIN, LOW);
 //Setup GPT0 and callback function
   noInterrupts();
-  myGpt.begin(0, 3000000, TIMER_SOURCE_DIV_16);         //Set GPT0 period to 1sec (1*48e-6/16)
+  myGpt.begin(0, 3000000, TIMER_SOURCE_DIV_16);         //Set GPT0 period to 1 sec (1*48e6/16)
   myGpt.setCallback(OVERFLOW, 2, irq_gptovf_callback);  //Set callback function with priorty 2 (higher)
   R_GPT0->GTST_b.TCFPO = 0;                             //Overflow irq status clear
   R_GPT0->GTSTR_b.CSTRT0 = 1;                           //Start GPT0
@@ -109,7 +116,7 @@ void setup() {
 //// Loop function
 void loop() {
   if (flag1sec > 0) {
-    Serial.println(secCount++);     //Time print every 1second
+    Serial.println(secCount++);     //Time print every 1 second
     flag1sec = 0;
   }
   delayMicroseconds(10);
