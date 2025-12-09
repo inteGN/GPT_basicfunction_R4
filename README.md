@@ -1,4 +1,4 @@
-# GPT_basiclibrary_R4
+# GPT_basicfunction_R4
 
 ## 概要 / Overview
 このライブラリはArduino UNO R4のGPTタイマーを使ったプログラミングを簡単にするよう作られています。  
