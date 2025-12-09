@@ -148,7 +148,7 @@ Refer current cause of interrupt and clear it
 1.0.0 First release  
 1.0.1 Name 'TimerIntSource_t' change to lower-case  
 1.0.2 Name 'retCallback()' change to 'clearInterruptflag()'  
-1.0.3 The timer start status follows as previous one after setCallback() process  
+1.0.3 The timer start status follows as previous one after setCallback() process, resistor GTSTR accessibility improved  
 
 ---
 
