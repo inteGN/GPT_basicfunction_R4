@@ -98,7 +98,7 @@ void setup() {
   R_GPT7->GTBER = 0x00000003;                             //Does not use buffer mode
   R_GPT7->GTST_b.TCFPO = 0;                               //Overflow irq status clear
   R_GPT7->GTST_b.TCFA  = 0;                               //Compare-match-A irq status clear
-  R_GPT7->GTSTR_b.CSTRT7 = 1;                             //Start GPT7
+  R_GPT0->GTSTR_b.CSTRT7 = 1;                             //Start GPT7
   interrupts();
 }
 
