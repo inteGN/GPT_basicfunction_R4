@@ -1,4 +1,4 @@
-# GPT_basicfunction_R4
+# GPT_basiclibrary_R4
 
 ## 概要 / Overview
 このライブラリはArduino UNO R4のGPTタイマーを使ったプログラミングを簡単にするよう作られています。  
@@ -70,12 +70,6 @@ routine (ISR) is called every 1 second and turns LED on/off.
 #include <Arduino.h>
 #include <GPT_basicfunction.h>
 
-//// Definitions
-#define     __NOP2            asm volatile ( \
-                                "nop   \n" \
-                                "nop   \n" \
-                                )
-
 //// Grobals
 GPTFunction  myGpt;
 uint8_t   ledState = 0;
@@ -91,8 +85,7 @@ void  irq_gptovf_callback() {
   flag1sec++;
 //Termination of Irq
   R_GPT0->GTST_b.TCFPO = 0;
-  __NOP2;
-  myGpt.clearInterruptFlag();
+  myGpt.retCallback();
 }
 
 
@@ -105,7 +98,7 @@ void setup() {
   digitalWrite(LED_BUILTIN, LOW);
 //Setup GPT0 and callback function
   noInterrupts();
-  myGpt.begin(0, 3000000, TIMER_SOURCE_DIV_16);         //Set GPT0 period to 1sec (1*48e6/16)
+  myGpt.begin(0, 3000000, TIMER_SOURCE_DIV_16);         //Set GPT0 period to 1sec (1*48e-6/16)
   myGpt.setCallback(OVERFLOW, 2, irq_gptovf_callback);  //Set callback function with priorty 2 (higher)
   R_GPT0->GTST_b.TCFPO = 0;                             //Overflow irq status clear
   R_GPT0->GTSTR_b.CSTRT0 = 1;                           //Start GPT0
@@ -140,6 +133,15 @@ Set callback function of timer GPT interrupt together with priority level and ve
 ### clearInterruptFlag(void)
 現在の割り込みフラグを参照してクリアする  
 Refer current cause of interrupt and clear it  
+
+---
+
+## Revision history
+
+1.0.0 First release  
+1.0.1 Name 'TimerIntSource_t' change to lower-case  
+1.0.2 Name 'retCallback()' change to 'clearInterruptflag()'  
+1.0.3 The timer start status follows as previous one after setCallback() process  
 
 ---
 

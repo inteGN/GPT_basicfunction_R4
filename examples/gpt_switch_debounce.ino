@@ -103,7 +103,7 @@ void setup() {
 void loop() {
 //チャタリングを除去した結果をLED_TXに出力する    //Output debounced value to LED_TX
   digitalWrite(LED_TX, SWdetect_2);
-//Time print every 1second
+//Time print every 1 second
   if (flag1sec > 0) {
     Serial.println(secCount++);
     flag1sec = 0;

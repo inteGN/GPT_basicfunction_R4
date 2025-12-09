@@ -1,6 +1,7 @@
 //************************************************
 //  FILE        :GPT_basicfunction.h
 //  DATE        :2025/11/03
+//  VERSION     :1.0.3 (2025/12/09)
 //  DESCRIPTION :header of GPT resistor setting
 //  BOARD TYPE  :UNO R4 MINIMA
 //  AUTHOR      :inteGN
@@ -38,6 +39,7 @@ typedef enum {
 class GPTFunction {
 private:
   FspTimer fsp_timer;
+  uint8_t  myChannel;
 
 public:
 //Store provided timer setting values to class variables
