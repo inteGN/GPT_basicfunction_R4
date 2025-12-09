@@ -13,10 +13,17 @@
 bool GPTFunction::begin(uint8_t channel, uint32_t period, timer_source_div_t sd) {
   myChannel = channel;
   bool rv = true;
-  if (channel < 2)      {R_MSTP->MSTPCRD_b.MSTPD5 = 0;}             //GPT320～GPT321 activation
-  else if (channel < 8) {R_MSTP->MSTPCRD_b.MSTPD6 = 0;}             //GPT162～GPT167 activation
-  rv = fsp_timer.begin(TIMER_MODE_PWM, GPT_TIMER, channel, period, 0xA5A5, sd, nullptr, nullptr);   //(period-1) -> GTPR
-  rv = fsp_timer.open();
+  if (channel < 8) {
+    R_MSTP->MSTPCRD_b.MSTPD5 = 0;             //GPT320～GPT321 activation
+    R_MSTP->MSTPCRD_b.MSTPD6 = 0;             //GPT162～GPT167 activation
+  }
+  else {
+    rv = false;
+  }
+  if (rv) {
+    rv = fsp_timer.begin(TIMER_MODE_PWM, GPT_TIMER, channel, period, 0xA5A5, sd, nullptr, nullptr);   //(period-1) -> GTPR
+    rv = fsp_timer.open();
+  }
   return rv;
 }
 
